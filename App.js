@@ -56,7 +56,7 @@ const applyLoan = () => {
     return (currentBalance)
 }
 
-const repayLoan = () => { // hide the repayloan button when there is no more loan
+const repayLoan = () => {
     currentLoan -= currentPay
     if (currentLoan < 0)
     {
