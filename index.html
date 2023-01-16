@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Komputer Store</title>
+    <link rel="stylesheet" href="style.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+  </head>
+  <body>
+	<div>
+		<h1>Komputer Store</h1>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col text-center">
+				<div class="p-3 border" style="height: 240px;">
+					<h2>Joe Average</h2>
+					<p>Balance
+						<div id="balance">200</div>
+					</p>
+					<button onclick =
+						"document.getElementById('balance').
+						innerText = applyLoan()">
+						Get a loan
+					</button>
+					<p id="loan"></p>
+				</div>
+			</div>
+			<div class="col text-center">
+				<div class="p-3 border" style="height: 240px;">
+					<h2>Work</h2>
+					<div>
+						Pay:
+						<div id="pay">0</div>
+					</div>
+					<button onclick="Bank()">Bank</button>
+					<button onclick="document.getElementById('pay').innerText =
+						work()">Work</button>
+					<button
+						id="repay" onclick="repayLoan()"
+						style = 'display:none'>Repay Loan
+					</button>
+				</div>
+			</div>
+			<div class="col text-center">
+				<div class="dropdown">
+					<button onclick="dropDownLaptops()" class="dropbtn">Laptops</button>
+					<div class="dropdown-content" id="dropdownlaptops">
+					  <a href="#">Link 1</a>
+					  <a href="#">Link 2</a>
+					  <a href="#">Link 3</a>
+					</div>
+				  </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col gy-5">
+				<div id="lapTopInfo" class="p-3 border">
+					<button onclick="buyLapTop()">Buy Now</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="App.js">
+	</script>
+  </body>
+</html>
