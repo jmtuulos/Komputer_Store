@@ -3,6 +3,26 @@
 let currentBalance = 200
 let currentLoan = 0
 let currentPay = 0
+let url = "https://hickory-quilled-actress.glitch.me/computers"
+let obj
+
+class Laptop {
+    constructor(data) {
+        this.title = data.title
+        this.id = data.id
+        this.specs = data.specs
+        this.description = data.description
+        this.price = data.price
+        this.stock = data.stock
+        this.active = data.active
+        this.image = data.image
+    }
+
+}
+fetch(url)
+    .then(response => response.json())
+    .then(json => populateLink(json))
+    .catch(err => alert(err));
 
 const updateBalance = () => {
     document.getElementById("balance").innerText = currentBalance
@@ -77,14 +97,47 @@ const updateLoanAmount = () => {
         document.getElementById('repay').style = 'display:none'
 }
 
-const dropDownLaptops = () =>{
+const dropDownLaptops = () =>
     document.getElementById("dropdownlaptops").classList.toggle("show")
+
+const saveLaptopData = (data) => {
+
 }
+
+const populateLink = (data) => {
+    const link = document.getElementById("dropdownlaptops")
+    data.forEach(element => {
+        const tag = document.createElement("a")
+        tag.appendChild(document.createTextNode(element.title))
+        tag.id = element.id
+        tag.href = "javascript:showLapTop()"
+        link.appendChild(tag)
+
+        // console.log(tag.id + tag.innerHTML)
+    })
+}
+
+const showLapTop = (id) => {
+    id--
+    fetch(url)
+    .then(response => response.json())
+    .then(json => {
+        document.getElementById("title").innerText = json[id].title
+        json[id].specs.forEach(element => {
+            document.getElementById("specs").innerText += element + '\n'
+        document.getElementById("price").innerText = json[id].price
+        });
+    })
+    .catch(err => alert(err))
+}
+
+showLapTop(1)
+
 
 window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
         var elements = document.getElementsByClassName("dropdown-content");
-        for (var i = 0; i < dropdowns.length; i++) {
+        for (var i = 0; i < elements.length; i++) {
             var openDropdown = elements[i];
             if (openDropdown.classList.contains('show'))
                 openDropdown.classList.remove('show');
