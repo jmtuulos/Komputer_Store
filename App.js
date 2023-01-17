@@ -54,7 +54,6 @@ const buyLapTop = (price) => {
     }
     else
         alert("Insufficient funds!")
-
 }
 
 const applyLoan = () => {
@@ -90,7 +89,7 @@ const repayLoan = () => {
 const updateLoanAmount = () => {
     document.getElementById('loan').innerText = "Current loan: " + currentLoan
     if (currentLoan > 0)
-        document.getElementById('repay').style = 'display:block'
+        document.getElementById('repay').style = 'display:inline'
     else
         document.getElementById('repay').style = 'display:none'
 }
@@ -115,12 +114,14 @@ const showLapTop = (e) => {
     .then(response => response.json())
     .then(json => {
         document.getElementById("title").innerText = json[i].title
-        document.getElementById("specs").innerText = ""
+        document.getElementById("specs").innerText = "Specs:\n"
         document.getElementById("features").innerText = json[i].description
-        document.getElementById("image").src = baseUrl + json[i].image
+        imgElement = document.getElementById("image")
+        imgElement.src = baseUrl + json[i].image
+        // imgElement.onerror = imgElement.src = baseUrl + json[i].image.replace(".jpg", ".png")
         json[i].specs.forEach(element => {
             document.getElementById("specs").innerText += element + '\n'
-        document.getElementById("price").innerText = json[i].price
+        document.getElementById("price").innerText = "Price: " + json[i].price
         });
     })
     .catch(err => alert(err))
