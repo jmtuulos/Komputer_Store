@@ -1,26 +1,33 @@
-// import showDropDownLaptops from "./laptops.js"
-
 let currentLoan = 0
-let currentBalance = 200
+let currentBalance = 0
 let currentPay = 0
+let currentLaptopPrice = 0
 let url = "https://hickory-quilled-actress.glitch.me/computers"
 
 fetch(url)
-    .then(response => response.json())
-    .then(json => populateLink(json))
-    .catch(err => alert(err));
+.then(response => response.json())
+.then(json => populateLink(json))
+.catch(err => alert(err));
 
 const updateBalance = () => {
-    document.getElementById("balance").innerText = currentBalance
+    document.getElementById("balance").innerText = eurCurrency(currentBalance)
 }
 
 const updateWorkBalance = () => {
-    document.getElementById("pay").innerText = currentPay
+    document.getElementById("pay").innerText = eurCurrency(currentPay)
+}
+
+const eurCurrency = (value) => {
+    return (
+        new Intl.NumberFormat(
+            'fi-FI', {style: 'currency', currency: 'EUR'})
+            .format(value)
+    )
 }
 
 const work = () => {
     currentPay += 100
-    return (currentPay)
+    return (eurCurrency(currentPay))
 }
 
 const Bank = () => {
@@ -45,25 +52,24 @@ const transferToBank = () => {
     updateBalance()
 }
 const buyLapTop = (price) => {
-    price = parseInt(document.getElementById("price").innerText)
-    if (currentBalance >= price)
+    if (currentBalance >= currentLaptopPrice)
     {
-        currentBalance -= price
+        currentBalance -= currentLaptopPrice
         updateBalance()
         alert("You are the proud owner of a brand new laptop!")
     }
     else
-        alert("Insufficient funds!")
+    alert("Insufficient funds!")
 }
 
 const applyLoan = () => {
     let amount = parseInt(prompt("Please enter the loan amount"))
     if (amount == null || amount == "" || isNaN(amount))
-        alert("Incorrect value")
+    alert("Incorrect value")
     else if (amount > currentBalance * 2)
-        alert("You cannot get a loan more than double your balance")
+    alert("You cannot get a loan more than double your balance")
     else if (currentLoan != 0)
-        alert("You have to pay your loan first before getting a new one")
+    alert("You have to pay your loan first before getting a new one")
     else
     {
         currentLoan = amount
@@ -83,19 +89,20 @@ const repayLoan = () => {
     }
     currentPay = 0
     updateWorkBalance()
+    updateBalance()
     updateLoanAmount()
 }
 
 const updateLoanAmount = () => {
-    document.getElementById('loan').innerText = "Current loan: " + currentLoan
+    document.getElementById('loan').innerText = "Current loan: " + eurCurrency(currentLoan)
     if (currentLoan > 0)
-        document.getElementById('repay').style = 'display:inline'
+    document.getElementById('repay').style = 'display:inline'
     else
-        document.getElementById('repay').style = 'display:none'
+    document.getElementById('repay').style = 'display:none'
 }
 
 const dropDownLaptops = () =>
-    document.getElementsById("dropDownLaptops").classList.toggle("show")
+document.getElementsById("dropDownLaptops").classList.toggle("show")
 
 const populateLink = (data) => {
     const link = document.getElementById("dropDownLaptops")
@@ -118,10 +125,10 @@ const showLapTop = (e) => {
         document.getElementById("features").innerText = json[i].description
         imgElement = document.getElementById("image")
         imgElement.src = baseUrl + json[i].image
-        // imgElement.onerror = imgElement.src = baseUrl + json[i].image.replace(".jpg", ".png")
+        currentLaptopPrice = json[i].price
         json[i].specs.forEach(element => {
             document.getElementById("specs").innerText += element + '\n'
-        document.getElementById("price").innerText = "Price: " + json[i].price
+            document.getElementById("price").innerText = "Price: " + eurCurrency(json[i].price)
         });
     })
     .catch(err => alert(err))
