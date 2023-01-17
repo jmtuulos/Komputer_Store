@@ -1,3 +1,31 @@
+.container-1 {
+    border: 1px solid #444;
+    height: 100%;
+    width: 100%;
+	border-radius: 10px;
+}
+
+.bg-1 {
+	background-color: #1abc9c;
+	color: #ffffff;
+}
+
+.bg-2 {
+    background-color: #2e333c;
+    color: #fcfcfc;
+}
+
+
+.bg-3 {
+    background-color: #2e333c;
+    color: #fcfcfc;
+}
+
+.container-fluid {
+	padding-top: 70px;
+	padding-bottom: 70px;
+  }
+
 .dropbtn {
   background-color: #3f5e62;
   color: white;
