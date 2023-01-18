@@ -4,6 +4,7 @@ let currentPay = 0
 let currentLaptopPrice = 0
 let url = "https://hickory-quilled-actress.glitch.me/computers"
 
+// Initial fetch of the json data
 fetch(url)
 .then(response => response.json())
 .then(json => populateLink(json))
@@ -133,6 +134,8 @@ const showLapTop = (e) => {
     })
     .catch(err => alert(err))
 }
+
+// Hiding the dropdown selection when clicked outside of it
 
 window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
